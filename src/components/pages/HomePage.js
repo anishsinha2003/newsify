@@ -28,13 +28,10 @@ const HomePage = () => {
     };
   }, []);
   const calculateNewLines = () => {
-    if (windowWidth > 1400) {
+    if (windowWidth > 1520) {
       return <><br/><br/><br/></>;
     } else {
-      return <><br/><br/><br/><br/><br/><br/><br/>
-      <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-      <br/><br/><br/><br/><br/><br/><br/><br/>
-      <br/><br/><br/><br/><br/><br/><br/><br/></>;
+      return <><br/><br/><br/></>;
     }
   };
 

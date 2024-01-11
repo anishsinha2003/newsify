@@ -214,10 +214,26 @@ input{
   text-align: center;
 }
 .slide-container {
-  background-color: black;
-  width: 1000px;
+  background-color: none;
+  width: 900px;
   height: 600px;
+  padding-right: 20px;
   float: right;
+}
+@media screen and (max-width: 1520px) {
+  .slide-container {
+    width: 100vw;
+    float:none;
+  }
+  .welcome-div {
+    height: 1050px;
+  }
+  .writting-1 {
+    width: fit-content;
+  }
+  .writting-2 {
+    width: fit-content;
+  }
 }
 .text-slide-link {
   font-size: 20px;
@@ -461,9 +477,99 @@ input{
 	box-shadow: 0 20px 20px -20px #333;
   margin: -50px auto 10px;
 }
+/* feedback submit button */
+.feedback-button {
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  display: block;
+  margin: auto;
+  border-radius: 4px;
+  background-color: #fbf1cc;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+
+.feedback-button{
+    width: 170px;
+    height: 55px;
+    border: none;
+    outline: none;
+    background: #ffffff;
+    color: black;
+    font-size: 18px;
+    border-radius: 40px;
+    text-align: center;
+    box-shadow: 0 6px 20px -5px rgba(0,0,0,1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.check-box{
+    width: 55px;
+    height: 55px;
+    border-radius: 40px;
+    box-shadow: 0 0 12px -2px rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    right: -40px;
+    opacity: 0;
+}
+
+.check-box svg{
+    width: 40px;
+    margin: 10px;
+}
+
+.svg path{
+    stroke-width: 3;
+    stroke: black;
+    stroke-dasharray: 34;
+    stroke-dashoffset: 34;
+    stroke-linecap: round;
+}
+
+.active{
+    background: #f9eab4;
+    transition: 1s;
+    padding-left: 35px;
+}
+
+.active .check-box{
+    right: 0;
+    opacity: 1;
+    transition: 1s;
+}
+
+.active p{
+    margin-right: 125px;
+    transition: 1s;
+}
+
+.active svg path{
+    stroke-dashoffset: 0;
+    transition: 1s;
+    transition-delay: 1s;
+}
+/* contact info */
+.contact {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: none;
+}
+.email-copied {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: none;
+}
 /* progress bar */
-
 .loading-background {
   margin:0;
   padding:0;
@@ -526,6 +632,7 @@ span:before
   right:-8px;
   box-shadow:0 0 20px rgb(253, 209, 44);
 }
+
 @keyframes animateC
 {
   0%

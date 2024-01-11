@@ -7,6 +7,7 @@ import TechPage from "./components/pages/TechPage.js"
 import BusinessPage from "./components/pages/BusinessPage.js"
 import QueryPage from "./components/pages/QueryPage.js"
 import Loading from "./components/pages/Loading.js"
+import AboutPage from "./components/pages/AboutPage.js"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         the params from useParams in QueryPage.js */}
         <Route path="query/:search" element={<QueryPage/>} />
         <Route path="loading" element={<Loading/>} />
+        <Route path="about" element={<AboutPage />} />
       </Routes>
     </BrowserRouter>
     </div>
