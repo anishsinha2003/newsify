@@ -4,7 +4,7 @@ import NewsCard from "../NewsCard.js"
 import NewsCardSmall from "../NewsCardSmall.js"
 import Loading from "./Loading.js"
 
-const TechPage = () => {
+const BusinessPage = () => {
 
   const [news, setNews] = useState([])
   const [newsTop, setNewsTop] = useState([])
@@ -32,7 +32,7 @@ const TechPage = () => {
     const fetchSportsNewsData = async () => {
       try {
         // fetching data
-        const response = await fetch('https://newsapi.org/v2/everything?q=technology&sortBy=date&apiKey=2521afe3ecaa4a7a8867632fbe645962');
+        const response = await fetch('https://newsapi.org/v2/everything?q=business&sortBy=date&apiKey=2521afe3ecaa4a7a8867632fbe645962');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -164,7 +164,7 @@ const TechPage = () => {
               fontSize: "40px",
               fontFamily: "'Poppins', sans-serif",
             }}>
-              Latest Tech News
+              Latest Business News
             </div>
             <br/>
             <hr className="hr-underline"/>
@@ -191,4 +191,4 @@ const TechPage = () => {
       </>
     )
   }
-export default TechPage;
+export default BusinessPage;

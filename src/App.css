@@ -1,5 +1,12 @@
+iframe#webpack-dev-server-client-overlay{display:none!important}
+
 .App {
-  background-color: none;
+  background-image: url('images/yellow-background.png');
+  width: 100vw;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+
 }
 
 /* HomePage */
@@ -8,7 +15,7 @@
 .topnav {
   float: left;
   width: 100vw;
-  background-color: none;
+  background-color: white;
   overflow: hidden;
   padding-left: 20px;
   height: 60px;
@@ -127,13 +134,19 @@ input{
   color: black;
 }
 
+/* category page wlecome div stuff */
+
+.first-top-headline {
+
+}
+
 /* welcome div (right after navbar) */
 
 .welcome-div {
   width: 100vw;
   height: 600px;
   position: relative;
-  bottom: 12px;
+  bottom: 16px;
   background-color: rgb(241, 238, 238);
 }
 
@@ -173,7 +186,7 @@ input{
   font-size: 20px;
   font-weight: bold;
   color: black;
-  background-color: white;
+  background-color: #f5e095;
   padding: 20px;
   border-radius: 20px;
   box-shadow: 10px 5px 5px rgb(63, 63, 63);
@@ -240,5 +253,314 @@ input{
 
 }
 
+/* news card */
+
+.cards-container {
+  padding-top: 30px;
+  padding-left: 30px;
+  width: 100vw;
+  background-color: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 60px 50px;
+}
+.card {
+  word-wrap: break-word;
+
+  width: 300px;
+  height: 700px;
+  margin: 20;
+  padding: 16px;
+  text-align: center;
+  text-align: left;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  backface-visibility: hidden;
+
+}
+.card-front {
+  background: rgb(251, 251, 250);
+  border-radius: 10px;
+  color: black;
+  z-index: 2;
+  /* box-shadow: 1px 1px 50px rgb(242, 240, 240); */
+
+}
+.card-back {
+  background: linear-gradient(to right, #f4eac6, #FDD12C);
+  border-radius: 10px;
+  color: black;
+  transform: rotateY(180deg);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  box-shadow: 1px 10px 20px black;
+  align-items: center;
+}
+.card:hover {
+  cursor: pointer;
+}
+
+.card:focus {
+  outline: 0;
+}
+
+.card:hover .card-inner,
+.card:focus .card-inner{
+  transform: rotateY(180deg);
+}
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+
+.card-title {
+  padding-left: 20px;
+  padding-right: 30px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+
+}
+.card-publishedAt {
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 30px;
+
+}
+.card-author {
+  padding-left: 20px;
+  padding-right: 30px;
+  font-size: 13px;
+
+}
+.card-description {
+  padding-left: 20px;
+  padding-right: 30px;
+  line-height: 25px;
+
+}
+.card-name {
+  padding-left: 20px;
+  padding-right: 30px;
+
+}
+.card-img {
+  width: 300px;
+  height: 150px;
+}
+.card-back-text {
+  color: rgb(70, 69, 69);
+  font-size: 40px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  letter-spacing: 3px;
+  font-weight: bolder;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
 /* SportPage */
 
+
+.grid-wrapper {
+  display: grid;
+  grid-gap: 13px;
+  /* background-color: black; */
+  background-color: rgb(241, 238, 238);
+  color: #444;
+  width: 100vw;
+  height: 700px;
+  grid-template-columns: [offset] 1% [column1] 15% [column2] 15% [column3] 15% [column4] 15% [column5] 15% [column6] 19% [end];
+  grid-template-rows: [offset] 1% [row1] 47% [row2] 46% [end];
+}
+.card-small {
+  word-wrap: break-word;
+  width: 100%;
+  height: 100%;
+  margin: 20;
+  text-align: center;
+  text-align: left;
+
+}
+.small-card-img {
+  width: 100%;
+  height: 245px;
+}
+
+.small-card-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  padding-left: 20px;
+  padding-top: 13px;
+  width: 80%;
+  height: fit-content;
+  background-color: none;
+
+}
+.card-small:hover {
+  cursor: pointer;
+}
+
+.card-small:focus {
+  outline: 0;
+}
+
+.card-small:hover .card-inner,
+.card-small:focus .card-inner{
+  transform: rotateY(180deg);
+}
+.item-a {
+  grid-column-start: column1;
+  grid-column-end: column3;
+  grid-row-start: row1;
+  grid-row-end: row2;
+  background-color:none;
+}
+
+.item-b {
+  grid-column-start: column3;
+  grid-column-end: column5;
+  grid-row-start: row1;
+  grid-row-end: row2;
+  background-color:none;
+}
+.item-c {
+  grid-column-start: column5;
+  grid-column-end: end;
+  grid-row-start: row1;
+  grid-row-end: row2;
+  background-color:none;
+}
+.item-d {
+  grid-column-start: column1;
+  grid-column-end: column3;
+  grid-row-start: row2;
+  grid-row-end: end;
+  background-color:none;
+}
+.item-e {
+  grid-column-start: column3;
+  grid-column-end: column5;
+  grid-row-start: row2;
+  grid-row-end: end;
+  background-color:none;
+}
+.item-f {
+  grid-column-start: column5;
+  grid-column-end: end;
+  grid-row-start: row2;
+  grid-row-end: end;
+  background-color:none;
+}
+
+/* common */
+
+.hr-underline {
+  border:none;
+  height: 20px;
+ 	width: 18%;
+	height: 50px;
+	margin-top: 0;
+	border-bottom: 1px solid #1f1209;
+	box-shadow: 0 20px 20px -20px #333;
+  margin: -50px auto 10px;
+}
+
+/* progress bar */
+
+.loading-background {
+  margin:0;
+  padding:0;
+  background-color:#262626;
+}
+.ring {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:150px;
+  height:150px;
+  background:transparent;
+  border:3px solid #3c3c3c;
+  border-radius:50%;
+  text-align:center;
+  line-height:150px;
+  font-family:sans-serif;
+  font-size:20px;
+  color:#000000;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  box-shadow:0 0 20px rgba(0,0,0,.5);
+}
+.ring:before
+{
+  content:'';
+  position:absolute;
+  top:-3px;
+  left:-3px;
+  width:100%;
+  height:100%;
+  border:3px solid transparent;
+  border-top:3px solid rgb(253, 209, 44);
+  border-right:3px solid rgb(253, 209, 44);
+  border-radius:50%;
+  animation:animateC 2s linear infinite;
+}
+span
+{
+  display:block;
+  position:absolute;
+  top:calc(50% - 2px);
+  left:50%;
+  width:50%;
+  height:4px;
+  background:transparent;
+  transform-origin:left;
+  animation:animate 2s linear infinite;
+}
+span:before
+{
+  content:'';
+  position:absolute;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:rgb(253, 209, 44);
+  top:-6px;
+  right:-8px;
+  box-shadow:0 0 20px rgb(253, 209, 44);
+}
+@keyframes animateC
+{
+  0%
+  {
+    transform:rotate(0deg);
+  }
+  100%
+  {
+    transform:rotate(360deg);
+  }
+}
+@keyframes animate
+{
+  0%
+  {
+    transform:rotate(45deg);
+  }
+  100%
+  {
+    transform:rotate(405deg);
+  }
+}
