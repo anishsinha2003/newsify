@@ -285,12 +285,15 @@ input{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   backface-visibility: hidden;
 
+
 }
 .card-front {
   background: rgb(251, 251, 250);
   border-radius: 10px;
   color: black;
   z-index: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
   /* box-shadow: 1px 1px 50px rgb(242, 240, 240); */
 
 }
@@ -401,7 +404,7 @@ input{
 
 .small-card-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 11px;
+  font-size: 14px;
   padding-left: 20px;
   padding-top: 13px;
   width: 80%;

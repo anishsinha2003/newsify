@@ -12,10 +12,10 @@ const NewsCardSmall = (props) => {
       <div className="card-inner">
         <div className="card-front">
 					<div className="small-card-title">
-						{props.title.length > 210 ? `${props.title.slice(0, 210)}...` : props.title}
+						{props.title.length > 100 ? `${props.title.slice(0, 100)}...` : props.title}
 					</div>
           <br/>
-          {props.urlToImage !== null && ImageExist(props.urlToImage)
+          {props.urlToImage !== null // && ImageExist(props.urlToImage)
           ? <div>
 							<img alt="img"className="small-card-img" src={props.urlToImage}/>
             </div>

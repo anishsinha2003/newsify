@@ -14,32 +14,36 @@ const QueryPage = () => {
     const fetchQueryNewsData = async () => {
       try {
         setLoadingPage(true)
-        console.log("Pass true");
-        const url = `https://newsapi.org/v2/everything?q=${search}&sortBy=date&apiKey=2521afe3ecaa4a7a8867632fbe645962`;
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+        const url = `https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=${search}`;
+        const options = {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': '1dabde3d8emsh5646da1981c06b1p15011fjsnb3f1c1ece65f',
+            'X-RapidAPI-Host': 'news67.p.rapidapi.com'
+          }
         }
+        const response = await fetch(url, options);
         const result = await response.json();
-        console.log("Pass false");
         setLoadingPage(false)
         let count = 0;
         let latestNews = []
-        for (const item of result.articles) {
+        for (const item of result.news) {
           if (count === 50) {
             break
           }
           const dict = {}
-          dict.name = item.source.name;
-          dict.author = item.author;
-          dict.description = item.description;
-          const timestamp = new Date(item.publishedAt);
+          dict.name = item.Source;
+          if (item.Description === "") {
+            dict.description = item.Summary;
+          } else {
+            dict.description = item.Description;
+          }
+          const timestamp = new Date(item.PublishedOn);
           const formattedDate = timestamp.toLocaleDateString();
           dict.publishedAt = formattedDate;
-          dict.content = item.content;
-          dict.urlToImage = item.urlToImage;
-          dict.title = item.title
-          dict.url = item.url
+          dict.urlToImage = item.Image;
+          dict.title = item.Title
+          dict.url = item.Url
           latestNews.push(dict)
           count = count + 1;
         }
@@ -71,7 +75,6 @@ const QueryPage = () => {
             {queryNews.map((dict, index) => (
               <>
               <NewsCard
-                author={dict.author}
                 content={dict.content}
                 description={dict.description}
                 name={dict.name}

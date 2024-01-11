@@ -10,11 +10,11 @@ const SportsPage = () => {
   const [loadingPage, setLoadingPage] = useState(false);
 
   function ImageExist(url)
-	{
-		 var img = new Image();
-		 img.src = url;
-		 return img.height !== 0;
-	}
+  {
+     var img = new Image();
+     img.src = url;
+     return img.height !== 0;
+  }
   function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
     while (currentIndex > 0) {
@@ -27,67 +27,77 @@ const SportsPage = () => {
     return array;
   }
   useEffect(() => {
-    const fetchSportsNewsData = async () => {
-      try {
-        // fetching data
-        const response = await fetch('https://newsapi.org/v2/everything?q=sport&sortBy=date&apiKey=2521afe3ecaa4a7a8867632fbe645962');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+    const fetchNew = async () => {
+
+      const url = 'https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=sport';
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '1dabde3d8emsh5646da1981c06b1p15011fjsnb3f1c1ece65f',
+          'X-RapidAPI-Host': 'news67.p.rapidapi.com'
         }
+      };
+
+      try {
+        const response = await fetch(url, options);
         const result = await response.json();
         let count = 0;
         let latestNews = []
         // setting all articles list
-        for (const item of result.articles) {
+        for (const item of result.news) {
           if (count === 50) {
             break
           }
           const dict = {}
-          dict.name = item.source.name;
-          dict.author = item.author;
-          dict.description = item.description;
-          const timestamp = new Date(item.publishedAt);
+          dict.name = item.Source;
+          const timestamp = new Date(item.PublishedOn);
+          if (item.Description === "") {
+            dict.description = item.Summary;
+          } else {
+            dict.description = item.Description;
+          }
           const formattedDate = timestamp.toLocaleDateString();
           dict.publishedAt = formattedDate;
-          dict.content = item.content;
-          dict.urlToImage = item.urlToImage;
-          dict.title = item.title
-          dict.url = item.url
+          dict.urlToImage = item.Image;
+          dict.title = item.Title
+          dict.url = item.Url
           latestNews.push(dict)
           count = count + 1;
         }
         setNews(latestNews)
+
         // setting only 6 articles list for header headlines
         count = 0;
         latestNews = []
-        for (const item of shuffle(result.articles)) {
+        console.log(result.news)
+        for (const item of shuffle(result.news)) {
           if (count === 6) {
             break
           }
-          if (item.urlToImage != null && ImageExist(item.urlToImage)) {
-            const dict = {}
-            dict.name = item.source.name;
-            dict.author = item.author;
-            dict.description = item.description;
-            const timestamp = new Date(item.publishedAt);
-            const formattedDate = timestamp.toLocaleDateString();
-            dict.publishedAt = formattedDate;
-            dict.content = item.content;
-            dict.urlToImage = item.urlToImage;
-            dict.title = item.title
-            dict.url = item.url
-            latestNews.push(dict)
-            count = count + 1;
-          }
+
+          const dict = {}
+          dict.name = item.Source;
+          dict.author = "author";
+          dict.content = item.Summary;
+          const timestamp = new Date(item.PublishedOn);
+          const formattedDate = timestamp.toLocaleDateString();
+          dict.publishedAt = formattedDate;
+          dict.urlToImage = item.Image;
+          dict.title = item.Title
+          dict.url = item.Url
+          latestNews.push(dict)
+          count = count + 1;
         }
+        console.log(latestNews)
         setNewsTop(latestNews)
         setLoadingPage(false)
+
       } catch (error) {
-        console.log(error)
+        console.error(error);
       }
-    };
+    }
     setLoadingPage(false)
-    fetchSportsNewsData();
+    fetchNew();
     setLoadingPage(true)
   }, []);
     return (

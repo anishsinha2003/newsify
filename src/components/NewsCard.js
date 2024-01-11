@@ -18,10 +18,6 @@ const NewsCard = (props) => {
             {props.title}
           </div>
           <br/>
-          <div className="card-author">
-            by - {props.author}
-          </div>
-          <br/>
           <div className="card-description">
             {props.description}
           </div>

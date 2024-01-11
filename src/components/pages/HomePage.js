@@ -20,67 +20,65 @@ const HomePage = () => {
     const fetchHomePageData = async () => {
       try {
         setLoadingPage(true)
-        const response = await fetch('https://newsapi.org/v2/everything?q=global&sortBy=date&apiKey=2521afe3ecaa4a7a8867632fbe645962');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        const url = 'https://news67.p.rapidapi.com/v2/feed?languages=en';
+        const options = {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': '1dabde3d8emsh5646da1981c06b1p15011fjsnb3f1c1ece65f',
+            'X-RapidAPI-Host': 'news67.p.rapidapi.com'
+          }
+        };
+        const response = await fetch(url, options);
         const result = await response.json();
+
         let count = 0;
         let setNewHomePageLatestNews = []
-        for (const item of result.articles) {
+        console.log(result.news)
+        for (const item of result.news) {
           if (count === 25) {
             break
           }
           const dict = {}
-          dict.name = item.source.name;
-          dict.author = item.author;
-          dict.description = item.description;
-          const timestamp = new Date(item.publishedAt);
+          dict.name = item.Source;
+          if (item.Description === "") {
+            dict.description = item.Summary;
+          } else {
+            dict.description = item.Description;
+          }
+          const timestamp = new Date(item.PublishedOn);
           const formattedDate = timestamp.toLocaleDateString();
           dict.publishedAt = formattedDate;
-          dict.content = item.content;
-          dict.urlToImage = item.urlToImage
-          dict.title = item.title
-          dict.url = item.url
+          dict.urlToImage = item.Image;
+          dict.title = item.Title
+          dict.url = item.Url
           setNewHomePageLatestNews.push(dict)
           count = count + 1;
         }
         setHomePageData(setNewHomePageLatestNews)
-        setLoadingPage(false)
-      } catch (error) {
-        console.log(error)
-      }
-    };
-    const fetchSliderImageUrls = async () => {
-      try {
-        const response = await fetch('https://newsapi.org/v2/everything?q=global&sortBy=popularity&apiKey=2521afe3ecaa4a7a8867632fbe645962');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const result = await response.json();
-        let count = 0;
+        count = 0;
         let setNewSliderList = []
-        for (const item of shuffle(result.articles)) {
+        for (const item of shuffle(result.news)) {
           if (count === 4) {
             break
           }
           if (item.urlToImage !== null){
             const dict = {}
-            dict.urlToImage = item.urlToImage
-            dict.title = item.title
-            dict.url = item.url
+            dict.urlToImage = item.Image
+            dict.title = item.Title
+            dict.url = item.Url
             setNewSliderList.push(dict)
             count = count + 1;
           }
         }
-
+        console.log(setNewSliderList)
         setImageSliderURLS(setNewSliderList)
+        setLoadingPage(false)
       } catch (error) {
         console.log(error)
       }
     };
+
     fetchHomePageData();
-    fetchSliderImageUrls();
   }, []);
 
   function shuffle(array) {
@@ -153,7 +151,6 @@ const HomePage = () => {
           {homePageData.map((dict, index) => (
             <>
             <NewsCard
-              author={dict.author}
               content={dict.content}
               description={dict.description}
               name={dict.name}
