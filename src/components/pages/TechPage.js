@@ -158,7 +158,7 @@ const TechPage = () => {
                 ))}
               </div>
             </div>
-            <br/><br/><br/><br/><br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/><br/><br/>
             <div style={{
               textAlign: "center",
               fontSize: "40px",
