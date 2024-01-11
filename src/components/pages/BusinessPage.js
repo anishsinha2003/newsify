@@ -108,64 +108,62 @@ const BusinessPage = () => {
         : <div>
             <NavBar/>
             <br/><br/><br/><br/>
-            <div className="welcome-div">
-              <div className="grid-wrapper">
-                {newsTop.map((dict, index) => (
-                  index === 0
-                    ? <div className="item-a">
-                        <NewsCardSmall
-                          publishedAt={dict.publishedAt}
-                          title={dict.title}
-                          url={dict.url}
-                          urlToImage={dict.urlToImage}
-                        />
-                      </div>
-                    : index === 1
-                    ? <div className="item-b">
-                        <NewsCardSmall
-                          publishedAt={dict.publishedAt}
-                          title={dict.title}
-                          url={dict.url}
-                          urlToImage={dict.urlToImage}
-                        />
-                      </div>
-                    : index === 2
-                    ? <div className="item-c">
-                        <NewsCardSmall
-                          publishedAt={dict.publishedAt}
-                          title={dict.title}
-                          url={dict.url}
-                          urlToImage={dict.urlToImage}
-                        />
-                      </div>
-                    : index === 3
-                    ? <div className="item-d">
-                        <NewsCardSmall
-                          publishedAt={dict.publishedAt}
-                          title={dict.title}
-                          url={dict.url}
-                          urlToImage={dict.urlToImage}
-                        />
-                      </div>
-                    : index === 4
-                    ? <div className="item-e">
-                        <NewsCardSmall
-                          publishedAt={dict.publishedAt}
-                          title={dict.title}
-                          url={dict.url}
-                          urlToImage={dict.urlToImage}
-                        />
-                      </div>
-                    : <div className="item-f">
-                        <NewsCardSmall
-                          publishedAt={dict.publishedAt}
-                          title={dict.title}
-                          url={dict.url}
-                          urlToImage={dict.urlToImage}
-                        />
-                      </div>
-                ))}
-              </div>
+            <div className="grid-wrapper">
+              {newsTop.map((dict, index) => (
+                index === 0
+                  ? <div className="item-a">
+                      <NewsCardSmall
+                        publishedAt={dict.publishedAt}
+                        title={dict.title}
+                        url={dict.url}
+                        urlToImage={dict.urlToImage}
+                      />
+                    </div>
+                  : index === 1
+                  ? <div className="item-b">
+                      <NewsCardSmall
+                        publishedAt={dict.publishedAt}
+                        title={dict.title}
+                        url={dict.url}
+                        urlToImage={dict.urlToImage}
+                      />
+                    </div>
+                  : index === 2
+                  ? <div className="item-c">
+                      <NewsCardSmall
+                        publishedAt={dict.publishedAt}
+                        title={dict.title}
+                        url={dict.url}
+                        urlToImage={dict.urlToImage}
+                      />
+                    </div>
+                  : index === 3
+                  ? <div className="item-d">
+                      <NewsCardSmall
+                        publishedAt={dict.publishedAt}
+                        title={dict.title}
+                        url={dict.url}
+                        urlToImage={dict.urlToImage}
+                      />
+                    </div>
+                  : index === 4
+                  ? <div className="item-e">
+                      <NewsCardSmall
+                        publishedAt={dict.publishedAt}
+                        title={dict.title}
+                        url={dict.url}
+                        urlToImage={dict.urlToImage}
+                      />
+                    </div>
+                  : <div className="item-f">
+                      <NewsCardSmall
+                        publishedAt={dict.publishedAt}
+                        title={dict.title}
+                        url={dict.url}
+                        urlToImage={dict.urlToImage}
+                      />
+                    </div>
+              ))}
             </div>
             <br/><br/><br/><br/><br/><br/><br/><br/>
             <div style={{

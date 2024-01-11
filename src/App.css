@@ -379,7 +379,7 @@ input{
   display: grid;
   grid-gap: 13px;
   /* background-color: black; */
-  background-color: rgb(241, 238, 238);
+  background-color: none;
   color: #444;
   width: 100vw;
   height: 700px;
