@@ -29,7 +29,7 @@ const SportsPage = () => {
   useEffect(() => {
     const fetchNew = async () => {
       setLoadingPage(true)
-      const url = 'https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=sport';
+      const url = 'https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=sport&batchSize=30';
       const options = {
         method: 'GET',
         headers: {
@@ -44,7 +44,7 @@ const SportsPage = () => {
         let count = 0;
         let latestNews = []
         // setting all articles list
-        for (const item of result.news) {
+        for (const item of shuffle(result.news)) {
           if (count === 50) {
             break
           }

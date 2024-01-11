@@ -9,12 +9,6 @@ const HealthPage = () => {
   const [newsTop, setNewsTop] = useState([])
   const [loadingPage, setLoadingPage] = useState(false);
 
-  // function ImageExist(url)
-  // {
-  //    var img = new Image();
-  //    img.src = url;
-  //    return img.height !== 0;
-  // }
   function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
     while (currentIndex > 0) {
@@ -29,7 +23,7 @@ const HealthPage = () => {
   useEffect(() => {
     const fetchNew = async () => {
       setLoadingPage(true)
-      const url = 'https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=health';
+      const url = 'https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=health&batchSize=30';
       const options = {
         method: 'GET',
         headers: {
@@ -44,7 +38,7 @@ const HealthPage = () => {
         let count = 0;
         let latestNews = []
         // setting all articles list
-        for (const item of result.news) {
+        for (const item of shuffle(result.news)) {
           if (count === 50) {
             break
           }

@@ -10,13 +10,11 @@ import Loading from "./components/pages/Loading.js"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  // const [query, setQuery] = useState("")
 
   return (
     <div className="App">
       <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<HomePage query={query} setQuery={setQuery}/>} /> */}
         <Route path="/" element={<HomePage/>} />
         <Route path="sports" element={<SportsPage />} />
         <Route path="health" element={<HealthPage />} />

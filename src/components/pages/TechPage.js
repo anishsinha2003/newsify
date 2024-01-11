@@ -9,12 +9,6 @@ const TechPage = () => {
   const [newsTop, setNewsTop] = useState([])
   const [loadingPage, setLoadingPage] = useState(false);
 
-  // function ImageExist(url)
-  // {
-  //    var img = new Image();
-  //    img.src = url;
-  //    return img.height !== 0;
-  // }
   function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
     while (currentIndex > 0) {
@@ -29,13 +23,14 @@ const TechPage = () => {
   useEffect(() => {
     const fetchNew = async () => {
       setLoadingPage(true)
-      const url = 'https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=technology';
+      const url = 'https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=technology&batchSize=30';
       const options = {
         method: 'GET',
+        url: 'https://news67.p.rapidapi.com/v2/topic-search',
         headers: {
           'X-RapidAPI-Key': '1dabde3d8emsh5646da1981c06b1p15011fjsnb3f1c1ece65f',
           'X-RapidAPI-Host': 'news67.p.rapidapi.com'
-        }
+        },
       };
 
       try {
@@ -44,7 +39,7 @@ const TechPage = () => {
         let count = 0;
         let latestNews = []
         // setting all articles list
-        for (const item of result.news) {
+        for (const item of shuffle(result.news)) {
           if (count === 50) {
             break
           }

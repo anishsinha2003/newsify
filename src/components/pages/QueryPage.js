@@ -3,18 +3,19 @@ import {useState, useEffect} from "react";
 import NewsCard from "../NewsCard.js"
 import { useParams } from 'react-router-dom';
 import Loading from "./Loading.js";
+import Nothing from "../../images/nothing.png"
 
-// const QueryPage = (props) => {
 const QueryPage = () => {
   const [queryNews, setQueryNews] = useState([])
   const { search } = useParams();
   const [loadingPage, setLoadingPage] = useState(false);
+  const [nothingFoundPage, setNothingFoundPage] = useState(false);
 
   useEffect(() => {
     const fetchQueryNewsData = async () => {
       try {
         setLoadingPage(true)
-        const url = `https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=${search}`;
+        const url = `https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=${search}&batchSize=30`;
         const options = {
           method: 'GET',
           headers: {
@@ -26,7 +27,9 @@ const QueryPage = () => {
         const result = await response.json();
         let count = 0;
         let latestNews = []
-        console.log(result.news)
+        if (result.news.length === 0) {
+          throw new Error('Nothing found');
+        }
         for (const item of result.news) {
           if (count === 50) {
             break
@@ -50,7 +53,8 @@ const QueryPage = () => {
         setQueryNews(latestNews)
         setLoadingPage(false)
       } catch (error) {
-        console.log(error)
+        setLoadingPage(false)
+        setNothingFoundPage(true)
       }
     };
     fetchQueryNewsData();
@@ -59,6 +63,22 @@ const QueryPage = () => {
       <>
         {loadingPage
         ? <Loading/>
+        : nothingFoundPage
+        ? <div>
+          <NavBar/>
+          <br/><br/><br/><br/><br/><br/>
+          <div style={{
+            textAlign: "center",
+            fontSize: "40px",
+            fontFamily: "'Poppins', sans-serif",
+          }}>
+            Latest "{search}" News
+          </div>
+          <br/>
+          <hr className="hr-underline"/>
+          <br/><br/><br/>
+          <img alt="nothing" style={{ display: "block", margin: "auto" }} src={Nothing}/>
+        </div>
         : <div>
           <NavBar/>
           <br/><br/><br/><br/><br/><br/>

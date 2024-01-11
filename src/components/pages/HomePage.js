@@ -8,19 +8,41 @@ import NewsCard from "../NewsCard.js"
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading.js";
 
-// const HomePage = ({query, setQuery}) => {
 const HomePage = () => {
   const [query, setQuery] = useState("");
   const [homePageData, setHomePageData] = useState([]);
   const [imageSliderURLS, setImageSliderURLS] = useState([]);
   const [loadingPage, setLoadingPage] = useState(false);
   const navigate = useNavigate();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  const calculateNewLines = () => {
+    if (windowWidth > 1400) {
+      return <><br/><br/><br/></>;
+    } else {
+      return <><br/><br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/><br/><br/></>;
+    }
+  };
 
   useEffect(() => {
     const fetchHomePageData = async () => {
       try {
         setLoadingPage(true)
-        const url = 'https://news67.p.rapidapi.com/v2/feed?languages=en';
+        const url = 'https://news67.p.rapidapi.com/v2/feed?languages=en&batchSize=30';
         const options = {
           method: 'GET',
           headers: {
@@ -34,7 +56,7 @@ const HomePage = () => {
         let count = 0;
         let setNewHomePageLatestNews = []
         console.log(result.news)
-        for (const item of result.news) {
+        for (const item of shuffle(result.news)) {
           if (count === 25) {
             break
           }
@@ -135,7 +157,7 @@ const HomePage = () => {
             </form>
           </div>
         </div>
-        <br/><br/><br/>
+        {calculateNewLines()}
         <div style={{
           textAlign: "center",
           fontSize: "40px",
@@ -169,54 +191,3 @@ const HomePage = () => {
 }
 
 export default HomePage;
-
-      // <div className="welcome-div">
-      //   <Slider imageSliderURLS={imageSliderURLS}/>
-      //   <div className="writting-1">Welcome to Newsify. A place to find all your news</div>
-      //   <div className="writting-2">Search what type of news you want to read about below. Or select one of the tabs above to read some current affairs.</div>
-      //   <br/><br/><br/>
-      //   <div className="search-div">
-      //     <form>
-      //       <input
-      //         value={query}
-      //         onChange={handleInputChange}
-      //         onKeyPress={handleEnterPress}
-      //         type="search"
-      //         placeholder="Search News Here..."
-      //       />
-      //       <SearchIcon
-      //         onClick={handleQuery}
-      //         className="fa fa-search"
-      //         style={{ fontSize: '44px' }}
-      //       />
-      //     </form>
-      //   </div>
-      // </div>
-      // <br/><br/><br/>
-      // <div style={{
-      //   textAlign: "center",
-      //   fontSize: "40px",
-      //   fontFamily: "'Poppins', sans-serif",
-      // }}>
-      //   Latest News
-      // </div>
-      // <br/>
-      // <hr className="hr-underline"/>
-      // <br/><br/><br/>
-      // <div className="cards-container">
-      //   {homePageData.map((dict, index) => (
-      //     <>
-      //     <NewsCard
-      //       author={dict.author}
-      //       content={dict.content}
-      //       description={dict.description}
-      //       name={dict.name}
-      //       publishedAt={dict.publishedAt}
-      //       title={dict.title}
-      //       url={dict.url}
-      //       urlToImage={dict.urlToImage}
-      //     />
-      //       <br/><br/><br/>
-      //     </>
-      //   ))}
-      // </div>
