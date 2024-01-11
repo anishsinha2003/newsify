@@ -10,8 +10,8 @@ const NewsCard = (props) => {
           </div>
           <br/>
           {props.urlToImage !== null
-          ? <img className="card-img" src={props.urlToImage}/>
-          : <img className="card-img" src={NoImage}/>
+          ? <img alt="img"className="card-img" src={props.urlToImage}/>
+          : <img alt="img"className="card-img" src={NoImage}/>
           }
           <br/><br/>
           <div className="card-title">
