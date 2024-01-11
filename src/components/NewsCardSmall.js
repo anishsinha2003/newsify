@@ -1,12 +1,12 @@
 import NoImage from "../images/no-image.png";
 
 const NewsCardSmall = (props) => {
-	function ImageExist(url)
-	{
-		 var img = new Image();
-		 img.src = url;
-		 return img.height !== 0;
-	}
+	// function ImageExist(url)
+	// {
+	// 	 var img = new Image();
+	// 	 img.src = url;
+	// 	 return img.height !== 0;
+	// }
   return (
     <div className="card-small" onClick={() => window.open(props.url, '_blank')}>
       <div className="card-inner">
