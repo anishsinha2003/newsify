@@ -77,7 +77,6 @@ const HomePage = () => {
         console.log(error)
       }
     };
-
     fetchHomePageData();
   }, []);
 

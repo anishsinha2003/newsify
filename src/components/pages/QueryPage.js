@@ -24,9 +24,9 @@ const QueryPage = () => {
         }
         const response = await fetch(url, options);
         const result = await response.json();
-        setLoadingPage(false)
         let count = 0;
         let latestNews = []
+        console.log(result.news)
         for (const item of result.news) {
           if (count === 50) {
             break
@@ -48,6 +48,7 @@ const QueryPage = () => {
           count = count + 1;
         }
         setQueryNews(latestNews)
+        setLoadingPage(false)
       } catch (error) {
         console.log(error)
       }
