@@ -37,12 +37,13 @@ const TechPage = () => {
         const result = await response.json();
         let count = 0;
         let latestNews = []
+        let listDone = []
         // setting all articles list
         for (const item of shuffle(result)) {
           if (count === 100) {
             break
           }
-          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png") {
+          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png" && !item.image.includes("theprint") && !listDone.includes(item.summary)) {
             const dict = {}
             dict.name = item.author;
             const timestamp = new Date(item.dateLong);
@@ -53,6 +54,7 @@ const TechPage = () => {
             dict.title = item.title
             dict.url = item.url
             latestNews.push(dict)
+            listDone.push(item.summary)
             count = count + 1;
           }
         }
@@ -61,13 +63,14 @@ const TechPage = () => {
         // setting only 6 articles list for header headlines
         count = 0;
         latestNews = []
+        listDone = []
         console.log(result)
         for (const item of shuffle(result)) {
           if (count === 6) {
             break
           }
 
-          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png") {
+          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png" && !item.image.includes("theprint") && !listDone.includes(item.summary)) {
             const dict = {}
             dict.name = item.author;
             const timestamp = new Date(item.dateLong);
@@ -78,6 +81,7 @@ const TechPage = () => {
             dict.title = item.title
             dict.url = item.url
             latestNews.push(dict)
+            listDone.push(item.summary)
             count = count + 1;
           }
         }

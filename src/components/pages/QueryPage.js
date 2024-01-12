@@ -32,11 +32,12 @@ const QueryPage = () => {
         if (result.length === 0) {
           throw new Error('Nothing found');
         }
+        let listDone = []
         for (const item of result) {
           if (count === 100) {
             break
           }
-          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png") {
+          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png" && !item.image.includes("theprint") && !listDone.includes(item.summary)) {
             const dict = {}
             dict.name = item.author;
             const timestamp = new Date(item.dateLong);
@@ -46,6 +47,7 @@ const QueryPage = () => {
             dict.urlToImage = item.image;
             dict.title = item.title
             dict.url = item.url
+            listDone.push(item.summary)
             latestNews.push(dict)
             count = count + 1;
           }

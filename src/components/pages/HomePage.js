@@ -53,11 +53,12 @@ const HomePage = () => {
 
         let count = 0;
         let setNewHomePageLatestNews = []
+        let listDone = []
         for (const item of shuffle(result)) {
           if (count === 100) {
             break
           }
-          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png") {
+          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png" && !item.image.includes("theprint") && !listDone.includes(item.summary)) {
             const dict = {}
             dict.name = item.author;
             const timestamp = new Date(item.dateLong);
@@ -67,6 +68,7 @@ const HomePage = () => {
             dict.urlToImage = item.image;
             dict.title = item.title
             dict.url = item.url
+            listDone.push(item.summary)
             setNewHomePageLatestNews.push(dict)
             count = count + 1;
           }
@@ -74,11 +76,12 @@ const HomePage = () => {
         setHomePageData(setNewHomePageLatestNews)
         count = 0;
         let setNewSliderList = []
+        listDone = []
         for (const item of shuffle(result)) {
           if (count === 4) {
             break
           }
-          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png") {
+          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png" && !item.image.includes("theprint") && !listDone.includes(item.summary)) {
             const dict = {}
             dict.name = item.author;
             const timestamp = new Date(item.dateLong);
@@ -88,6 +91,7 @@ const HomePage = () => {
             dict.urlToImage = item.image;
             dict.title = item.title
             dict.url = item.url
+            listDone.push(item.summary)
             setNewSliderList.push(dict)
             count = count + 1;
           }
