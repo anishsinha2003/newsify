@@ -23,12 +23,12 @@ const HealthPage = () => {
   useEffect(() => {
     const fetchNew = async () => {
       setLoadingPage(true)
-      const url = 'https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=health&batchSize=30';
+      const url = 'https://newsx.p.rapidapi.com/search/?q=health&limit=100&skip=0';
       const options = {
         method: 'GET',
         headers: {
           'X-RapidAPI-Key': '1dabde3d8emsh5646da1981c06b1p15011fjsnb3f1c1ece65f',
-          'X-RapidAPI-Host': 'news67.p.rapidapi.com'
+          'X-RapidAPI-Host': 'newsx.p.rapidapi.com'
         }
       };
 
@@ -38,48 +38,48 @@ const HealthPage = () => {
         let count = 0;
         let latestNews = []
         // setting all articles list
-        for (const item of shuffle(result.news)) {
-          if (count === 50) {
+        for (const item of shuffle(result)) {
+          if (count === 100) {
             break
           }
-          const dict = {}
-          dict.name = item.Source;
-          const timestamp = new Date(item.PublishedOn);
-          if (item.Description === "") {
-            dict.description = item.Summary;
-          } else {
-            dict.description = item.Description;
+          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png") {
+            const dict = {}
+            dict.name = item.author;
+            const timestamp = new Date(item.dateLong);
+            dict.description = item.summary;
+            const formattedDate = timestamp.toLocaleDateString();
+            dict.publishedAt = formattedDate;
+            dict.urlToImage = item.image;
+            dict.title = item.title
+            dict.url = item.url
+            latestNews.push(dict)
+            count = count + 1;
           }
-          const formattedDate = timestamp.toLocaleDateString();
-          dict.publishedAt = formattedDate;
-          dict.urlToImage = item.Image;
-          dict.title = item.Title
-          dict.url = item.Url
-          latestNews.push(dict)
-          count = count + 1;
         }
         setNews(latestNews)
 
         // setting only 6 articles list for header headlines
         count = 0;
         latestNews = []
-        console.log(result.news)
-        for (const item of shuffle(result.news)) {
+        console.log(result)
+        for (const item of shuffle(result)) {
           if (count === 6) {
             break
           }
 
-          const dict = {}
-          dict.name = item.Source;
-          dict.content = item.Summary;
-          const timestamp = new Date(item.PublishedOn);
-          const formattedDate = timestamp.toLocaleDateString();
-          dict.publishedAt = formattedDate;
-          dict.urlToImage = item.Image;
-          dict.title = item.Title
-          dict.url = item.Url
-          latestNews.push(dict)
-          count = count + 1;
+          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png") {
+            const dict = {}
+            dict.name = item.author;
+            const timestamp = new Date(item.dateLong);
+            dict.description = item.summary;
+            const formattedDate = timestamp.toLocaleDateString();
+            dict.publishedAt = formattedDate;
+            dict.urlToImage = item.image;
+            dict.title = item.title
+            dict.url = item.url
+            latestNews.push(dict)
+            count = count + 1;
+          }
         }
         console.log(latestNews)
         setNewsTop(latestNews)

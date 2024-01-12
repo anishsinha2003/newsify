@@ -22,7 +22,6 @@ const NavBar = () => {
     return size;
   }
   const [width] = useWindowSize();
-  console.log(width)
   return (
     <div className="topnav">
       <img src={logo} alt="logo" className="logo"/>

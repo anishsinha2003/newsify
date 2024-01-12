@@ -35,16 +35,17 @@ const HomePage = () => {
     }
   };
 
+// Fetch the HTML content from the URL
   useEffect(() => {
     const fetchHomePageData = async () => {
       try {
         setLoadingPage(true)
-        const url = 'https://news67.p.rapidapi.com/v2/feed?languages=en&batchSize=30';
+        const url = `https://newsx.p.rapidapi.com/search/?limit=100&skip=0`;
         const options = {
           method: 'GET',
           headers: {
             'X-RapidAPI-Key': '1dabde3d8emsh5646da1981c06b1p15011fjsnb3f1c1ece65f',
-            'X-RapidAPI-Host': 'news67.p.rapidapi.com'
+            'X-RapidAPI-Host': 'newsx.p.rapidapi.com'
           }
         };
         const response = await fetch(url, options);
@@ -52,44 +53,45 @@ const HomePage = () => {
 
         let count = 0;
         let setNewHomePageLatestNews = []
-        console.log(result.news)
-        for (const item of shuffle(result.news)) {
-          if (count === 25) {
+        for (const item of shuffle(result)) {
+          if (count === 100) {
             break
           }
-          const dict = {}
-          dict.name = item.Source;
-          if (item.Description === "") {
-            dict.description = item.Summary;
-          } else {
-            dict.description = item.Description;
+          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png") {
+            const dict = {}
+            dict.name = item.author;
+            const timestamp = new Date(item.dateLong);
+            dict.description = item.summary;
+            const formattedDate = timestamp.toLocaleDateString();
+            dict.publishedAt = formattedDate;
+            dict.urlToImage = item.image;
+            dict.title = item.title
+            dict.url = item.url
+            setNewHomePageLatestNews.push(dict)
+            count = count + 1;
           }
-          const timestamp = new Date(item.PublishedOn);
-          const formattedDate = timestamp.toLocaleDateString();
-          dict.publishedAt = formattedDate;
-          dict.urlToImage = item.Image;
-          dict.title = item.Title
-          dict.url = item.Url
-          setNewHomePageLatestNews.push(dict)
-          count = count + 1;
         }
         setHomePageData(setNewHomePageLatestNews)
         count = 0;
         let setNewSliderList = []
-        for (const item of shuffle(result.news)) {
+        for (const item of shuffle(result)) {
           if (count === 4) {
             break
           }
-          if (item.urlToImage !== null){
+          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png") {
             const dict = {}
-            dict.urlToImage = item.Image
-            dict.title = item.Title
-            dict.url = item.Url
+            dict.name = item.author;
+            const timestamp = new Date(item.dateLong);
+            dict.description = item.summary;
+            const formattedDate = timestamp.toLocaleDateString();
+            dict.publishedAt = formattedDate;
+            dict.urlToImage = item.image;
+            dict.title = item.title
+            dict.url = item.url
             setNewSliderList.push(dict)
             count = count + 1;
           }
         }
-        console.log(setNewSliderList)
         setImageSliderURLS(setNewSliderList)
         setLoadingPage(false)
       } catch (error) {
@@ -169,6 +171,7 @@ const HomePage = () => {
           {homePageData.map((dict, index) => (
             <>
             <NewsCard
+              key={index}
               content={dict.content}
               description={dict.description}
               name={dict.name}

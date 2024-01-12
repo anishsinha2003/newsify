@@ -90,8 +90,8 @@ const AboutPage = () => {
           margin: "auto"
         }}>
         To bring you the most accurate and up-to-date news content, Newsify relies on the powerful &nbsp;
-        <a href={"https://rapidapi.com/connexun-srl-connexun-srl-default/api/news67"} target="_blank" rel="noopener noreferrer">
-          News67 API
+        <a href={"https://rapidapi.com/machaao-inc-machaao-inc-default/api/newsx"} target="_blank" rel="noopener noreferrer">
+          NewsX API
         </a>.&nbsp;
         This API, offers a comprehensive set of features that enable us to fetch, filter, and display news articles seamlessly.
         <br/><br/><br/><br/>

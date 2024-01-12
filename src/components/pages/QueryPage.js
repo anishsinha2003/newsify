@@ -12,52 +12,54 @@ const QueryPage = () => {
   const [nothingFoundPage, setNothingFoundPage] = useState(false);
 
   useEffect(() => {
-    const fetchQueryNewsData = async () => {
-      try {
-        setLoadingPage(true)
-        const url = `https://news67.p.rapidapi.com/v2/topic-search?languages=en&search=${search}&batchSize=30`;
-        const options = {
-          method: 'GET',
-          headers: {
-            'X-RapidAPI-Key': '1dabde3d8emsh5646da1981c06b1p15011fjsnb3f1c1ece65f',
-            'X-RapidAPI-Host': 'news67.p.rapidapi.com'
-          }
+    const fetchNew = async () => {
+      setLoadingPage(true)
+      const url = `https://newsx.p.rapidapi.com/search/?q=${search}&limit=100&skip=0`;
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '1dabde3d8emsh5646da1981c06b1p15011fjsnb3f1c1ece65f',
+          'X-RapidAPI-Host': 'newsx.p.rapidapi.com'
         }
+      };
+
+      try {
         const response = await fetch(url, options);
         const result = await response.json();
         let count = 0;
         let latestNews = []
-        if (result.news.length === 0) {
+        // setting all articles list
+        if (result.length === 0) {
           throw new Error('Nothing found');
         }
-        for (const item of result.news) {
-          if (count === 50) {
+        for (const item of result) {
+          if (count === 100) {
             break
           }
-          const dict = {}
-          dict.name = item.Source;
-          if (item.Description === "") {
-            dict.description = item.Summary;
-          } else {
-            dict.description = item.Description;
+          if (item.image !== "https://wtop.com/wp-content/uploads/2017/04/wtop_logo_512x512.png") {
+            const dict = {}
+            dict.name = item.author;
+            const timestamp = new Date(item.dateLong);
+            dict.description = item.summary;
+            const formattedDate = timestamp.toLocaleDateString();
+            dict.publishedAt = formattedDate;
+            dict.urlToImage = item.image;
+            dict.title = item.title
+            dict.url = item.url
+            latestNews.push(dict)
+            count = count + 1;
           }
-          const timestamp = new Date(item.PublishedOn);
-          const formattedDate = timestamp.toLocaleDateString();
-          dict.publishedAt = formattedDate;
-          dict.urlToImage = item.Image;
-          dict.title = item.Title
-          dict.url = item.Url
-          latestNews.push(dict)
-          count = count + 1;
         }
         setQueryNews(latestNews)
         setLoadingPage(false)
+
       } catch (error) {
+        console.log("PAS")
         setLoadingPage(false)
         setNothingFoundPage(true)
       }
-    };
-    fetchQueryNewsData();
+    }
+    fetchNew();
   }, [search]);
     return (
       <>
